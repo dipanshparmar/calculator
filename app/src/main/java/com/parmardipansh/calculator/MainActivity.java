@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +45,13 @@ public class MainActivity extends AppCompatActivity {
         allCancelButton.setOnClickListener(v -> output.setText(""));
 
         // modulus button
-        modulusButton.setOnClickListener(v -> output.setText((output.getText() + "%")));
+        modulusButton.setOnClickListener(v -> {
+            if(!(output.getText().toString().contains("%") || output.getText().toString().contains("/") || output.getText().toString().contains("x") || output.getText().toString().contains("-") || output.getText().toString().contains("+")) && output.getText().toString().length() > 0) {
+                output.setText((output.getText() + "%"));
+            } else {
+                Toast.makeText(this, "I'm not capable of that right now", Toast.LENGTH_LONG).show();
+            }
+        });
 
         // back button
         backButton.setOnClickListener(v -> {
@@ -57,8 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
         // divide button
         divideButton.setOnClickListener(v -> {
-            if(output.getText().toString().length() > 0) {
+            if(!(output.getText().toString().contains("%") || output.getText().toString().contains("/") || output.getText().toString().contains("x") || output.getText().toString().contains("-") || output.getText().toString().contains("+")) && output.getText().toString().length() > 0) {
                 output.setText((output.getText() + "/"));
+            } else {
+                Toast.makeText(this, "I'm not capable of that right now", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -73,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
 
         // multiply button
         multiplyButton.setOnClickListener(v -> {
-            if(output.getText().toString().length() > 0) {
+            if(!(output.getText().toString().contains("%") || output.getText().toString().contains("/") || output.getText().toString().contains("x") || output.getText().toString().contains("-") || output.getText().toString().contains("+")) && output.getText().toString().length() > 0) {
                 output.setText((output.getText() + "x"));
+            } else {
+                Toast.makeText(this, "I'm not capable of that right now", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -89,8 +100,10 @@ public class MainActivity extends AppCompatActivity {
 
         // minus button
         minusButton.setOnClickListener(v -> {
-            if(output.getText().toString().length() > 0) {
+            if(!(output.getText().toString().contains("%") || output.getText().toString().contains("/") || output.getText().toString().contains("x") || output.getText().toString().contains("-") || output.getText().toString().contains("+")) && output.getText().toString().length() > 0) {
                 output.setText((output.getText() + "-"));
+            } else {
+                Toast.makeText(this, "I'm not capable of that right now", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -105,8 +118,10 @@ public class MainActivity extends AppCompatActivity {
 
         // addition button
         additionButton.setOnClickListener(v -> {
-            if(output.getText().toString().length() > 0) {
+            if(!(output.getText().toString().contains("%") || output.getText().toString().contains("/") || output.getText().toString().contains("x") || output.getText().toString().contains("-") || output.getText().toString().contains("+")) && output.getText().toString().length() > 0) {
                 output.setText((output.getText() + "+"));
+            } else {
+                Toast.makeText(this, "I'm not capable of that right now", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -158,6 +173,17 @@ public class MainActivity extends AppCompatActivity {
             // for multiplication
             if(output.getText().toString().contains("x")) {
                 String[] numbers = output.getText().toString().split("x");
+                double number1 = Double.parseDouble(numbers[0]);
+                double number2 = Double.parseDouble(numbers[1]);
+                String result = String.valueOf(number1 * number2);
+
+                // setting the result
+                output.setText(result);
+            }
+
+            // for modulus
+            if(output.getText().toString().contains("%")) {
+                String[] numbers = output.getText().toString().split("%");
                 double number1 = Double.parseDouble(numbers[0]);
                 double number2 = Double.parseDouble(numbers[1]);
                 String result = String.valueOf(number1 * number2);
