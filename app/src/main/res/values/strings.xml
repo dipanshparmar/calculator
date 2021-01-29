@@ -20,5 +20,5 @@
     <string name="zero">0</string>
     <string name="dot">.</string>
     <string name="equals">=</string>
-    <string name="output">0</string>
+    <string name="output"></string>
 </resources>

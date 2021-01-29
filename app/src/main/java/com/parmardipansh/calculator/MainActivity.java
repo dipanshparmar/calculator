@@ -41,16 +41,26 @@ public class MainActivity extends AppCompatActivity {
         Button equalsButton = findViewById(R.id.equals);
 
         // setting all the values back to 0
-        allCancelButton.setOnClickListener(v -> output.setText("0"));
+        allCancelButton.setOnClickListener(v -> output.setText(""));
 
         // modulus button
         modulusButton.setOnClickListener(v -> output.setText((output.getText() + "%")));
 
         // back button
-        backButton.setOnClickListener(v -> output.setText(output.getText().toString().substring(0, output.getText().toString().length() - 1)));
+        backButton.setOnClickListener(v -> {
+            if(output.getText().toString().length() > 0) {
+                output.setText(output.getText().toString().substring(0, output.getText().toString().length() - 1));
+            } else {
+                output.setText("");
+            }
+        });
 
         // divide button
-        divideButton.setOnClickListener(v -> output.setText((output.getText() + "/")));
+        divideButton.setOnClickListener(v -> {
+            if(output.getText().toString().length() > 0) {
+                output.setText((output.getText() + "/"));
+            }
+        });
 
         // seven button
         sevenButton.setOnClickListener(v -> output.setText((output.getText() + "7")));
@@ -62,7 +72,11 @@ public class MainActivity extends AppCompatActivity {
         nineButton.setOnClickListener(v -> output.setText((output.getText() + "9")));
 
         // multiply button
-        multiplyButton.setOnClickListener(v -> output.setText((output.getText() + "x")));
+        multiplyButton.setOnClickListener(v -> {
+            if(output.getText().toString().length() > 0) {
+                output.setText((output.getText() + "x"));
+            }
+        });
 
         // four button
         fourButton.setOnClickListener(v -> output.setText((output.getText() + "4")));
@@ -74,7 +88,11 @@ public class MainActivity extends AppCompatActivity {
         sixButton.setOnClickListener(v -> output.setText((output.getText() + "6")));
 
         // minus button
-        minusButton.setOnClickListener(v -> output.setText((output.getText() + "-")));
+        minusButton.setOnClickListener(v -> {
+            if(output.getText().toString().length() > 0) {
+                output.setText((output.getText() + "-"));
+            }
+        });
 
         // one button
         oneButton.setOnClickListener(v -> output.setText((output.getText() + "1")));
@@ -86,7 +104,11 @@ public class MainActivity extends AppCompatActivity {
         threeButton.setOnClickListener(v -> output.setText((output.getText() + "3")));
 
         // addition button
-        additionButton.setOnClickListener(v -> output.setText((output.getText() + "+")));
+        additionButton.setOnClickListener(v -> {
+            if(output.getText().toString().length() > 0) {
+                output.setText((output.getText() + "+"));
+            }
+        });
 
         // two zeroes button
         doubleZeroButton.setOnClickListener(v -> output.setText((output.getText() + "00")));
@@ -98,12 +120,52 @@ public class MainActivity extends AppCompatActivity {
         dotButton.setOnClickListener(v -> output.setText((output.getText() + ".")));
 
         // equals button {
-        equalsButton.setOnClickListener(v -> solveExpression());
+        equalsButton.setOnClickListener(v -> {
 
-    }
+            // for division
+            if(output.getText().toString().contains("/")) {
+                String[] numbers = output.getText().toString().split("/");
+                double number1 = Double.parseDouble(numbers[0]);
+                double number2 = Double.parseDouble(numbers[1]);
+                String result = String.valueOf(number1 / number2);
 
-    // TODO: implement solve expression function
-    private void solveExpression() {
+                // setting the result
+                output.setText(result);
+            }
+
+            // for addition
+            if(output.getText().toString().contains("+")) {
+                String[] numbers = output.getText().toString().split("\\+");
+                double number1 = Double.parseDouble(numbers[0]);
+                double number2 = Double.parseDouble(numbers[1]);
+                String result = String.valueOf(number1 + number2);
+
+                // setting the result
+                output.setText(result);
+            }
+
+            // for subtraction
+            if(output.getText().toString().contains("-")) {
+                String[] numbers = output.getText().toString().split("-");
+                double number1 = Double.parseDouble(numbers[0]);
+                double number2 = Double.parseDouble(numbers[1]);
+                String result = String.valueOf(number1 - number2);
+
+                // setting the result
+                output.setText(result);
+            }
+
+            // for multiplication
+            if(output.getText().toString().contains("x")) {
+                String[] numbers = output.getText().toString().split("x");
+                double number1 = Double.parseDouble(numbers[0]);
+                double number2 = Double.parseDouble(numbers[1]);
+                String result = String.valueOf(number1 * number2);
+
+                // setting the result
+                output.setText(result);
+            }
+        });
 
     }
 
